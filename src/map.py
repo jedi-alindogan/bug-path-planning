@@ -26,8 +26,7 @@ class Map:
 
     def drawPath(self, ax, path):
         xs, ys = zip(*path)
-        neon_green = "#39FF14"
-        ax.plot(xs, ys, linestyle='-', marker=None, color=neon_green)
+        ax.plot(xs, ys, linestyle='-', marker=None, color='r')
 
     def drawMap(self, path, obstacles, save_path='map.png'):
         fig, ax = self.initMap()

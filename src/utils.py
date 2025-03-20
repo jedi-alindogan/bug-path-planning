@@ -39,3 +39,35 @@ class Intersections:
                     minIntersection = pts[idx]
                     minObstacle = obstacle
         return minIntersection, minObstacle
+
+    def isPointOnSegment(self, point1, point2, point, tol=1e-9):
+        """Check if point point lies on the line segment between point1 and point2.
+
+        Parameters:
+            point1 (list or tuple): [x1, y1] first endpoint of the segment.
+            point2 (list or tuple): [x2, y2] second endpoint of the segment.
+         point (list or tuple): [x0, y0] point to check.
+            tol (float): tolerance for floating-point comparisons.
+
+        Returns:
+            bool: True if point is on the segment, False otherwise.
+        """
+        x1, y1 = point1
+        x2, y2 = point2
+        x0, y0 = point
+
+        # Check collinearity using the determinant condition
+        if abs((x2 - x1) * (y0 - y1) - (y2 - y1) * (x0 - x1)) > tol:
+            return False  # Not collinear
+
+        # Check if the point is within the bounding box of the segment
+        return min(x1, x2) - tol <= x0 <= max(x1, x2) + tol and min(y1, y2) - tol <= y0 <= max(y1, y2) + tol
+    
+    def findEdgeFromHit(self, hit, obstacle, tol=1e-9):
+        for (idx, edge) in enumerate(obstacle.getEdges()):
+            point1, point2 = edge
+            if self.isPointOnSegment(point1, point2, hit, tol):
+                return edge
+        print(f"Point {hit} was not on obstacle boundary.")
+        return None
+    

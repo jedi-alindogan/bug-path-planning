@@ -41,6 +41,12 @@ class Obstacle:
         if self.isValidIndex(current_index, n):
             return (self.vertices[(current_index - 1) % n], self.vertices[current_index])
         
+    def getIndexFromVertex(self, vertice):
+        try:
+            return self.vertices.index(vertice)
+        except ValueError:
+            raise ValueError("The given vertex is not in the obstacle.")
+    
     def isValidIndex(self, index, n):
         if 0 <= index < n:
             return True
