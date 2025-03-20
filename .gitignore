@@ -1,0 +1,19 @@
+# Ignore compiled files
+*.o
+*.out
+*.exe
+
+# Ignore logs and temp files
+*.log
+*.tmp
+
+# Ignore Python virtual environments
+venv/
+__pycache__/
+
+# Ignore images
+*.png
+
+# Ignore system files
+.DS_Store
+Thumbs.db
